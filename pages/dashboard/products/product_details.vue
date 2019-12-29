@@ -51,6 +51,10 @@
               class="form-style"
               v-model="images"
             ></textarea>
+            <div id="image-uploader" style="margin-bottom: 20px">
+              <label for="images">Upload Images</label>
+              <span id="drag-drop-area"></span>
+            </div>
 
             <label for="specifications">Specifications</label>
             <textarea
@@ -124,148 +128,172 @@
 </template>
 
 <script>
-export default {
-  middleware: "auth",
-  data() {
-    return {
-      product_name: "",
-      description: "",
-      price: "",
-      discount: "",
-      images: "",
-      specifications: "",
-      bmr_min: "",
-      bmr_max: "",
-      category: "",
-      subcategory: "",
-      brand: "",
-      allcategories: [],
-      allsubcategories: []
-    };
-  },
-
-  computed: {},
-
-  mounted() {
-    this.getProductDetail();
-  },
-
-  methods: {
-    getProductDetail: function() {
-      this.$store
-        .dispatch("getProductDetail", this.$route.params.id)
-        .then(res => {
-          this.product_name = res.data.product_name;
-          this.description = res.data.description;
-          this.price = res.data.price;
-          this.discount = res.data.discount;
-          this.images = res.data.images;
-          this.specifications = res.data.specifications;
-          this.bmr_min = res.data.bmr_min;
-          this.bmr_max = res.data.bmr_max;
-          this.category = res.data.category.name;
-          this.category_id = res.data.category.id;
-          this.subcategory = res.data.subcategory.name;
-          this.subcategory_id = res.data.subcategory.id;
-          this.brand = res.data.brand.name;
-          this.brand_id = res.data.brand.id;
-
-          if (res.data.status == "0") {
-            $("input[value=0]").prop("checked", true);
-          } else if (res.data.status == "1") {
-            $("input[value=1]").prop("checked", true);
-          } else {
-            $("input[value=2]").prop("checked", true);
-          }
-
-          this.$store.dispatch("getCategory").then(res => {
-            this.allcategories = JSON.parse(JSON.stringify(res.data));
-
-            var select = document.getElementById("category");
-
-            const categoryObj = {};
-
-            res.data.map(item => {
-              categoryObj[item.id] = { name: item.name };
-            });
-
-            for (this.i in categoryObj) {
-              select.options[select.options.length] = new Option(
-                categoryObj[this.i].name,
-                this.i
-              );
-            }
-
-            $("#category").val(this.category_id);
-          });
-
-          this.$store.dispatch("getSubCategory").then(res => {
-            this.allsubcategories = JSON.parse(JSON.stringify(res.data));
-
-            var select = document.getElementById("subcategory");
-
-            const subcategoryObj = {};
-
-            res.data.map(item => {
-              subcategoryObj[item.id] = { name: item.name };
-            });
-
-            for (this.i in subcategoryObj) {
-              select.options[select.options.length] = new Option(
-                subcategoryObj[this.i].name,
-                this.i
-              );
-            }
-
-            $("#subcategory").val(this.subcategory_id);
-          });
-
-          this.$store.dispatch("getBrand").then(res => {
-            this.allbrands = JSON.parse(JSON.stringify(res.data));
-
-            var select = document.getElementById("brand");
-
-            const brandObj = {};
-
-            res.data.map(item => {
-              brandObj[item.id] = { name: item.name };
-            });
-
-            for (this.i in brandObj) {
-              select.options[select.options.length] = new Option(
-                brandObj[this.i].name,
-                this.i
-              );
-            }
-
-            $("#brand").val(this.brand_id);
-          });
-        });
+  export default {
+    middleware: "auth",
+    data() {
+      return {
+        product_name: "",
+        description: "",
+        price: "",
+        discount: "",
+        images: [],
+        specifications: "",
+        bmr_min: "",
+        bmr_max: "",
+        category: "",
+        subcategory: "",
+        brand: "",
+        allcategories: [],
+        allsubcategories: []
+      };
     },
 
-    updateProduct: function() {
-      var payload = {
-        id: this.$route.params.id,
-        product_name: this.product_name,
-        description: this.description,
-        price: this.price,
-        discount: this.discount,
-        images: this.images,
-        specifications: this.specifications,
-        bmr_min: this.bmr_min,
-        bmr_max: this.bmr_max,
-        status: $("input[name='status']:checked").val(),
-        category: $("#category").val(),
-        subcategory: $("#subcategory").val(),
-        brand: $("#brand").val()
-      };
-      this.$store.dispatch("updateProduct", payload).then(res => {
-        console.log(res);
-      });
-      this.$router.push("/dashboard/products/product_list");
+    computed: {},
+
+    mounted() {
+      this.getProductDetail();
+    },
+
+    methods: {
+      getProductDetail: function() {
+        this.$store
+          .dispatch("getProductDetail", this.$route.params.id)
+          .then(res => {
+            this.product_name = res.data.product_name;
+            this.description = res.data.description;
+            this.price = res.data.price;
+            this.discount = res.data.discount;
+            this.images = res.data.images;
+            this.specifications = res.data.specifications;
+            this.bmr_min = res.data.bmr_min;
+            this.bmr_max = res.data.bmr_max;
+            this.category = res.data.category.name;
+            this.category_id = res.data.category.id;
+            this.subcategory = res.data.subcategory.name;
+            this.subcategory_id = res.data.subcategory.id;
+            this.brand = res.data.brand.name;
+            this.brand_id = res.data.brand.id;
+            var uppy = Uppy.Core()
+              .use(Uppy.Dashboard, {
+                inline: true,
+                target: "#drag-drop-area",
+                width: 680,
+                height: 300
+              })
+              .use(Uppy.XHRUpload, {
+                endpoint: "http://127.0.0.1:8000/uppy_image"
+              });
+
+            uppy.on("complete", result => {
+              // console.log(
+              //   "Upload complete! We’ve uploaded these files:",
+              //   result.successful
+              // );
+              this.images = [];
+              result.successful.map(item => {
+                // console.log(item.response.body.file.url);
+
+                this.images.push(item.response.body.file.url);
+              });
+              // console.log(this.images);
+            });
+
+            if (res.data.status == "0") {
+              $("input[value=0]").prop("checked", true);
+            } else if (res.data.status == "1") {
+              $("input[value=1]").prop("checked", true);
+            } else {
+              $("input[value=2]").prop("checked", true);
+            }
+
+            this.$store.dispatch("getCategory").then(res => {
+              this.allcategories = JSON.parse(JSON.stringify(res.data));
+
+              var select = document.getElementById("category");
+
+              const categoryObj = {};
+
+              res.data.map(item => {
+                categoryObj[item.id] = { name: item.name };
+              });
+
+              for (this.i in categoryObj) {
+                select.options[select.options.length] = new Option(
+                  categoryObj[this.i].name,
+                  this.i
+                );
+              }
+
+              $("#category").val(this.category_id);
+            });
+
+            this.$store.dispatch("getSubCategory").then(res => {
+              this.allsubcategories = JSON.parse(JSON.stringify(res.data));
+
+              var select = document.getElementById("subcategory");
+
+              const subcategoryObj = {};
+
+              res.data.map(item => {
+                subcategoryObj[item.id] = { name: item.name };
+              });
+
+              for (this.i in subcategoryObj) {
+                select.options[select.options.length] = new Option(
+                  subcategoryObj[this.i].name,
+                  this.i
+                );
+              }
+
+              $("#subcategory").val(this.subcategory_id);
+            });
+
+            this.$store.dispatch("getBrand").then(res => {
+              this.allbrands = JSON.parse(JSON.stringify(res.data));
+
+              var select = document.getElementById("brand");
+
+              const brandObj = {};
+
+              res.data.map(item => {
+                brandObj[item.id] = { name: item.name };
+              });
+
+              for (this.i in brandObj) {
+                select.options[select.options.length] = new Option(
+                  brandObj[this.i].name,
+                  this.i
+                );
+              }
+
+              $("#brand").val(this.brand_id);
+            });
+          });
+      },
+
+      updateProduct: function() {
+        var payload = {
+          id: this.$route.params.id,
+          product_name: this.product_name,
+          description: this.description,
+          price: this.price,
+          discount: this.discount,
+          images: this.images,
+          specifications: this.specifications,
+          bmr_min: this.bmr_min,
+          bmr_max: this.bmr_max,
+          status: $("input[name='status']:checked").val(),
+          category: $("#category").val(),
+          subcategory: $("#subcategory").val(),
+          brand: $("#brand").val()
+        };
+        this.$store.dispatch("updateProduct", payload).then(res => {
+          // console.log(res);
+        });
+        this.$router.push("/dashboard/products/product_list");
+      }
     }
-  }
-};
+  };
 </script>
 
 <style scoped>

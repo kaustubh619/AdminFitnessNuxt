@@ -1,28 +1,36 @@
-
 export default {
-
-  
-  // server: {     
-  //   port: 8000, // default: 3000     
-  //   host: '0.0.0.0', // default: localhost   
+  // server: {
+  //   port: 8000, // default: 3000
+  //   host: '0.0.0.0', // default: localhost
   // },   //
-  mode: 'spa',
+  mode: "spa",
   /*
-  ** Headers of the page
-  */
+   ** Headers of the page
+   */
   head: {
-    title: process.env.npm_package_name || '',
+    title: process.env.npm_package_name || "",
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
+      { charset: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      {
+        hid: "description",
+        name: "description",
+        content: process.env.npm_package_description || ""
+      }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css' },
-      { rel: 'stylesheet', href: 'https://transloadit.edgly.net/releases/uppy/v1.6.0/uppy.min.css' },
+      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+      {
+        rel: "stylesheet",
+        href:
+          "https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css"
+      },
+      {
+        rel: "stylesheet",
+        href: "https://transloadit.edgly.net/releases/uppy/v1.6.0/uppy.min.css"
+      }
     ],
-    script:[
+    script: [
       {
         src: "https://code.jquery.com/jquery-3.4.1.min.js",
         type: "text/javascript"
@@ -30,67 +38,63 @@ export default {
       {
         src: "https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js",
         type: "text/javascript"
-      }, 
+      },
       {
-        src: "https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js",
+        src:
+          "https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js",
         type: "text/javascript"
       },
       {
         src: "https://transloadit.edgly.net/releases/uppy/v1.6.0/uppy.min.js",
         type: "text/javascript"
-      },
+      }
     ]
   },
   /*
-  ** Customize the progress-bar color
-  */
-  loading: { color: '#fff' },
+   ** Customize the progress-bar color
+   */
+  loading: { color: "#fff" },
   /*
-  ** Global CSS
-  */
-  css: [
-    "~static/files/css/framework.css"
-  ],
+   ** Global CSS
+   */
+  css: ["~static/files/css/framework.css"],
   /*
-  ** Plugins to load before mounting the App
-  */
+   ** Plugins to load before mounting the App
+   */
   plugins: [
-    { src: '~/plugins/PerfectScrollbar', lang: 'js' },
-    { src: '~/plugins/goodtable', lang: 'js' }
+    { src: "~/plugins/PerfectScrollbar", lang: "js" },
+    { src: "~/plugins/goodtable", lang: "js" }
   ],
   /*
-  ** Nuxt.js dev-modules
-  */
-  buildModules: [
-  ],
+   ** Nuxt.js dev-modules
+   */
+  buildModules: [],
   /*
-  ** Nuxt.js modules
-  */
+   ** Nuxt.js modules
+   */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios',
-    '@nuxtjs/pwa',
+    "@nuxtjs/axios",
+    "@nuxtjs/pwa"
   ],
 
   /*
-  ** Axios module configuration
-  ** See https://axios.nuxtjs.org/options
-  */
-  axios: {
-  },
+   ** Axios module configuration
+   ** See https://axios.nuxtjs.org/options
+   */
+  axios: {},
   /*
-  ** Build configuration
-  */
+   ** Build configuration
+   */
 
-  router:{
-    base: "/admin/"
+  router: {
+    base: ""
   },
 
   build: {
     /*
-    ** You can extend webpack config here
-    */
-    extend (config, ctx) {
-    }
+     ** You can extend webpack config here
+     */
+    extend(config, ctx) {}
   }
-}
+};

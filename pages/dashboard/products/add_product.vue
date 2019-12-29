@@ -191,14 +191,17 @@ a.uppy-Dashboard-poweredBy {
           width: 680,
           height: 300
         })
-        .use(Uppy.Tus, { endpoint: "https://master.tus.io/files/" });
+        .use(Uppy.XHRUpload, { endpoint: "http://127.0.0.1:8000/product_image" });
 
       uppy.on("complete", result => {
-        console.log(
-          "Upload complete! We’ve uploaded these files:",
-          result.successful
-        );
-        // , result.successful
+        // console.log(
+        //   "Upload complete! We’ve uploaded these files:",
+        //   result.successful
+        // );
+        result.successful.map(item => {
+          console.log(item);
+        });
+        this.images = JSON.stringify(result.successful);
       });
     },
 

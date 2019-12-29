@@ -89,6 +89,14 @@
         </nuxt-link>
       </div>
 
+      <p>Gallery</p>
+      <div class="navbar__parent">
+        <nuxt-link to="/dashboard/gallery">
+          <i data-feather="image"></i>
+          <span>Images</span>
+        </nuxt-link>
+      </div>
+
       <p>Subscription</p>
       <div class="navbar__parent">
         <nuxt-link to="/subscription">
@@ -241,48 +249,48 @@
 </template>
 
 <script>
-export default {
-  data: () => ({
-    active: false,
-    currentUserEmail: "",
-    pickup_count: 0,
-    message_count: 0,
-    username: ""
-  }),
+  export default {
+    data: () => ({
+      active: false,
+      currentUserEmail: "",
+      pickup_count: 0,
+      message_count: 0,
+      username: ""
+    }),
 
-  computed: {
-    // active : $store.state.sidenavStatus
-  },
-
-  mounted() {
-    feather.replace({ color: "white" });
-
-    this.currentUserEmail = localStorage.getItem("currentUserEmail");
-    this.username = localStorage.getItem("user_name");
-    // console.log(this.username)
-  },
-  methods: {
-    toggleSidenav: function() {
-      $("#mySidenav").toggleClass("hidden-xs hidden-sm");
+    computed: {
+      // active : $store.state.sidenavStatus
     },
-    logout: function() {
-      document.cookie.split(";").forEach(function(c) {
-        document.cookie = c
-          .replace(/^ +/, "")
-          .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
-      });
 
-      this.$router.push("/");
+    mounted() {
+      feather.replace({ color: "white" });
+
+      this.currentUserEmail = localStorage.getItem("currentUserEmail");
+      this.username = localStorage.getItem("user_name");
+      // console.log(this.username)
     },
-    logOutAdmin: function() {
-      // localStorage.removeItem("token")
-      // localStorage.removeItem("user_id")
-      // localStorage.removeItem("user_name")
-      localStorage.clear();
-      this.$router.push("/");
+    methods: {
+      toggleSidenav: function() {
+        $("#mySidenav").toggleClass("hidden-xs hidden-sm");
+      },
+      logout: function() {
+        document.cookie.split(";").forEach(function(c) {
+          document.cookie = c
+            .replace(/^ +/, "")
+            .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+        });
+
+        this.$router.push("/");
+      },
+      logOutAdmin: function() {
+        // localStorage.removeItem("token")
+        // localStorage.removeItem("user_id")
+        // localStorage.removeItem("user_name")
+        localStorage.clear();
+        this.$router.push("/");
+      }
     }
-  }
-};
+  };
 </script>
 
 <style scoped>

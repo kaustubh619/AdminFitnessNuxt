@@ -1395,5 +1395,44 @@ export const actions = {
           console.log("Error In HTTP Request - ", err);
         });
     });
+  },
+
+  getGalleryImages({ commit, state }) {
+    return new Promise((resolve, reject) => {
+      axios({
+        method: "GET",
+        url: state.api.getGalleryImages,
+        contentType: "application/json",
+        headers: {
+          Authorization: "Token " + localStorage.getItem("token")
+        }
+      })
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          console.log("Error In HTTP Request - ", err);
+        });
+    });
+  },
+
+  updateGallery({ commit, state }, payload) {
+    return new Promise((resolve, reject) => {
+      axios({
+        method: "PUT",
+        url: state.api.updateGallery + payload.get("id"),
+        contentType: "application/json",
+        data: payload,
+        headers: {
+          Authorization: "Token " + localStorage.getItem("token")
+        }
+      })
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          console.log("Error In HTTP Request - ", err);
+        });
+    });
   }
 };

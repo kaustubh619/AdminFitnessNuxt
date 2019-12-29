@@ -1,125 +1,87 @@
-// var url = "https://moovafrica.com/api/api";
-
-console.log(process.env.NODE_ENV);
+// console.log(process.env.NODE_ENV);
 
 var url;
 
 if (process.env.NODE_ENV == "development") {
-  var url = "http://127.0.0.1:8000/backend/api/";
+  var url = "http://127.0.0.1:8000";
 } else {
-  var url = "/backend/api/";
+  var url = "";
 }
 
-console.log(url);
-
 export const state = () => ({
-  login: "http://127.0.0.1:8000/api/login",
+  login: url + "/api/login",
 
-  imageUpload: url + "products/upload/image",
+  allProducts: url,
 
-  allProducts: "http://127.0.0.1:8000/",
+  deleteAdmin: url + "/user/",
 
-  singleProduct: url + "products/single/",
+  deleteTrainer: url + "/user/",
 
-  getCategory: url + "products/product/category",
+  getsubCategoryDetails: url + "/subcategory/",
 
-  getsubCategory: url + "products/product/subcategory",
+  getAllTrainer: url + "/user_trainer",
 
-  getAllSubCategory: url + "products/product/subcategory/all",
+  getAllCust: url + "/user_cust",
 
-  getBrand: url + "products/product/brand",
+  addTrainer: url + "/api/register",
 
-  getAllOrder: url + "orders",
+  addTrainerExt: url + "/user_ext_post",
 
-  getAllAuction: url + "auction",
+  getUserDetail: url + "/user/",
 
-  getAllCompletedAuction: url + "auction/completed/",
+  getUserExtDetail: url + "/user_ext/",
 
-  getAllOngoingAuction: url + "auction/ongoing/",
+  updateUser: url + "/user/",
 
-  addProduct: url + "products/create/product",
+  updateUserExt: url + "/user_ext/",
 
-  addAuction: url + "auction/create",
+  getProductDetail: url + "/single/",
 
-  deleteAdmin: "http://127.0.0.1:8000/user/",
+  getCategory: url + "/product/category",
 
-  deleteTrainer: "http://127.0.0.1:8000/user/",
+  getSubCategory: url + "/product/subcategory/all",
 
-  deleteSubCategory: url + "products/product/subcategory/delete/",
+  getBrand: url + "/product/brand/all",
 
-  deleteBrand: url + "products/product/brand/delete/",
+  updateProduct: url + "/product_update/",
 
-  getsubCategoryDetails: "http://127.0.0.1:8000/subcategory/",
+  deleteProduct: url + "/product/delete/",
 
-  allProductsRequests: url + "products/allProductsRequests", //id
+  addProduct: url + "/create/product",
 
-  changeProductStatus: url + "products/product/changeProductStatus/", //id
+  allCategories: url + "/product/category",
 
-  getAllSeller: "http://127.0.0.1:8000/user_ext", //id
+  allSubCategories: url + "/product/subcategory/all",
 
-  getAllTrainer: "http://127.0.0.1:8000/user_trainer",
+  subCategoryIdDetail: url + "/subcategory/",
 
-  getAllCust: "http://127.0.0.1:8000/user_cust",
+  allBrands: url + "/product/brand/all",
 
-  addTrainer: "http://127.0.0.1:8000/api/register",
+  deleteCategory: url + "/product/category/delete/",
 
-  addTrainerExt: "http://127.0.0.1:8000/user_ext_post",
+  deleteSubCategory: url + "/product/subcategory/delete/",
 
-  getUserDetail: "http://127.0.0.1:8000/user/",
+  deleteBrand: url + "/product/brand/delete/",
 
-  getUserExtDetail: "http://127.0.0.1:8000/user_ext/",
+  updateCategory: url + "/category/update/",
 
-  updateUser: "http://127.0.0.1:8000/user/",
+  addCategory: url + "/category/add",
 
-  updateUserExt: "http://127.0.0.1:8000/user_ext/",
+  updateSubCategory: url + "/subcategory/",
 
-  getProductDetail: "http://127.0.0.1:8000/single/",
+  addSubCategory: url + "/subcategory/add",
 
-  getCategory: "http://127.0.01:8000/product/category",
+  getBrandDetail: url + "/brand/",
 
-  getSubCategory: "http://127.0.01:8000/product/subcategory/all",
+  addBrand: url + "/product/brand/create",
 
-  getBrand: "http://127.0.01:8000/product/brand/all",
+  getPlans: url + "/subscription_plan",
 
-  updateProduct: "http://127.0.01:8000/product_update/",
+  getPlanDetails: url + "/sub_plan/",
 
-  deleteProduct: "http://127.0.0.1:8000/product/delete/",
+  getGalleryImages: url + "/images_gallery",
 
-  addProduct: "http://127.0.0.1:8000/create/product",
-
-  allCategories: "http://127.0.0.1:8000/product/category",
-
-  allSubCategories: "http://127.0.0.1:8000/product/subcategory/all",
-
-  subCategoryIdDetail: "http://127.0.0.1:8000/subcategory/",
-
-  allBrands: "http://127.0.0.1:8000/product/brand/all",
-
-  deleteCategory: "http://127.0.0.1:8000/product/category/delete/",
-
-  deleteSubCategory: "http://127.0.0.1:8000/product/subcategory/delete/",
-
-  deleteBrand: "http://127.0.0.1:8000/product/brand/delete/",
-
-  updateCategory: "http://127.0.0.1:8000/category/update/",
-
-  addCategory: "http://127.0.0.1:8000/category/add",
-
-  updateSubCategory: "http://127.0.0.1:8000/subcategory/",
-
-  addSubCategory: "http://127.0.0.1:8000/subcategory/add",
-
-  getBrandDetail: "http://127.0.0.1:8000/brand/",
-
-  addBrand: "http://127.0.0.1:8000/product/brand/create",
-
-  getPlans: "http://127.0.0.1:8000/subscription_plan",
-
-  getPlanDetails: "http://127.0.0.1:8000/sub_plan/"
+  updateGallery: url + "/update_gallery/"
 });
 
-export const getters = {
-  // getLoginAPI(state) {
-  //     return state.login
-  // }
-};
+export const getters = {};
