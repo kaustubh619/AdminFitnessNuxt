@@ -88,7 +88,7 @@ export default {
    */
 
   router: {
-    base: ""
+    base: "/admin/"
   },
 
   build: {
