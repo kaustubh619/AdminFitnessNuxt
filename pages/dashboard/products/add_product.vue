@@ -191,7 +191,7 @@ a.uppy-Dashboard-poweredBy {
           width: 680,
           height: 300
         })
-        .use(Uppy.XHRUpload, { endpoint: "http://127.0.0.1:8000/product_image" });
+        .use(Uppy.XHRUpload, { endpoint: "http://15.206.195.168/backend/uppy_image" });
 
       uppy.on("complete", result => {
         // console.log(

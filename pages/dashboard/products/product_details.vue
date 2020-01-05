@@ -181,7 +181,7 @@
                 height: 300
               })
               .use(Uppy.XHRUpload, {
-                endpoint: "http://127.0.0.1:8000/uppy_image"
+                endpoint: "http://15.206.195.168/backend/uppy_image"
               });
 
             uppy.on("complete", result => {
