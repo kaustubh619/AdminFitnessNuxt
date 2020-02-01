@@ -1,37 +1,3 @@
-// import Vuex from 'vuex';
-// import Vue from 'vue';
-
-// Vue.use(Vuex);
-
-// const createStore = () => {
-//     return new Vuex.Store({
-//         state: {
-//             registrations: [],
-//             users : 0
-//         },
-//         getters:{
-
-//             getCurrentUser(state){
-//                 return state.users
-//             }
-//         },
-//         mutations:{
-//             saveCurrentLoggedInUser(state, exercise){
-//                 console.log('selecting exercise mutation, ' + exercise)
-//                 state.users = exercise
-//               }
-//         },
-//         actions:{
-//             saveCurrentLoggedInUser(context, exercise){
-//                 console.log('selecting exercise action, ' + exercise)
-//                 context.commit('saveCurrentLoggedInUser', exercise);
-//               }
-//         }
-//     });
-//   };
-
-//   export default createStore
-
 import axios from "axios";
 axios.defaults.headers.post["Content-Type"] =
   "application/x-www-form-urlencoded";
@@ -52,7 +18,6 @@ export const mutations = {
     state.getCategory = getCategory;
   },
   getAllProducts(state, getAllProducts) {
-    // console.log('selecting exercise mutation, ' + getAllProducts)
     state.getAllProducts = getAllProducts;
   },
   getAllOrder(state, getAllOrder) {
@@ -84,213 +49,6 @@ export const getters = {
 };
 
 export const actions = {
-  // resetCogetCategoryunter({ commit, state }, payload) {
-
-  //     console.log(payload)
-
-  //     var bodyFormData = new FormData()
-
-  //     bodyFormData.append('customer_id', payload)
-
-  //     return new Promise((resolve, reject) => {
-
-  //         axios({
-  //             method: 'POST',
-  //             url: state.api.resetCounter,
-  //             data: bodyFormData,
-  //             contentType: 'application/json',
-  //             headers: {
-  //                 'Authorization': "Bearer " + this.$cookies.get('access_token')
-  //             }
-  //         })
-  //             .then(res => {
-  //                 console.log(res)
-  //                 console.log('response')
-  //                 commit('checkCounter', 0);
-  //                 resolve(res)
-  //             })
-  //             .catch(err => {
-  //                 console.log('error in request', err)
-  //             })
-  //     })
-  // },
-
-  getCategory({ commit, state }) {
-    return new Promise((resolve, reject) => {
-      axios({
-        method: "GET",
-        url: state.api.getCategory,
-        contentType: "application/json",
-        headers: {
-          Authorization: "Bearer " + this.$cookies.get("access_token")
-        }
-      })
-        .then(res => {
-          console.log(res.data);
-          console.log("response");
-          commit("getCategory", res.data);
-          resolve(res);
-        })
-        .catch(err => {
-          console.log("error in request", err);
-        });
-    });
-  },
-
-  addCategory({ commit, state }, payload) {
-    return new Promise((resolve, reject) => {
-      axios({
-        method: "POST",
-        url: state.api.getCategory,
-        data: payload,
-        contentType: "application/json",
-        headers: {
-          Authorization: "Bearer " + this.$cookies.get("access_token")
-        }
-      })
-        .then(res => {
-          console.log(res.data);
-          console.log("response");
-          commit("getCategory", res.data);
-          resolve(res);
-        })
-        .catch(err => {
-          console.log("error in request", err);
-        });
-    });
-  },
-
-  getsubCategory({ commit, state }, payload) {
-    return new Promise((resolve, reject) => {
-      if (payload == 0) {
-        payload = "all";
-      }
-
-      axios({
-        method: "GET",
-        url: state.api.getsubCategory + "/" + payload,
-        contentType: "application/json",
-        headers: {
-          Authorization: "Bearer " + this.$cookies.get("access_token")
-        }
-      })
-        .then(res => {
-          console.log(res.data);
-          console.log("response");
-          commit("getCategory", res.data);
-          resolve(res);
-        })
-        .catch(err => {
-          console.log("error in request", err);
-        });
-    });
-  },
-  addSubCategory({ commit, state }, payload) {
-    return new Promise((resolve, reject) => {
-      console.log(payload);
-      var bodyFormData = new FormData();
-      bodyFormData.append("name", payload.name);
-      bodyFormData.append("category", payload.category);
-
-      axios({
-        method: "POST",
-        url: state.api.getsubCategory + "/" + payload.category,
-        data: bodyFormData,
-        contentType: "application/json",
-        headers: {
-          Authorization: "Bearer " + this.$cookies.get("access_token")
-        }
-      })
-        .then(res => {
-          console.log(res.data);
-          console.log("response");
-          commit("getCategory", res.data);
-          resolve(res);
-        })
-        .catch(err => {
-          console.log("error in request", err);
-        });
-    });
-  },
-
-  // getsubCategoryDetails({ commit, state }, payload) {
-
-  //     return new Promise((resolve, reject) => {
-
-  //         axios({
-  //             method: 'GET',
-  //             url: state.api.getsubCategoryDetails + payload,
-  //             contentType: 'application/json',
-  //             headers: {
-  //              'Authorization': "Bearer " + this.$cookies.get('access_token')
-  //             }
-  //         })
-  //             .then(res => {
-  //                 console.log(res)
-  //                 console.log('response')
-  //                 resolve(res)
-  //             })
-  //             .catch(err => {
-  //                 console.log('error in request', err)
-  //             })
-  //     })
-  // },
-
-  saveSpecs({ commit, state }, payload) {
-    var bodyFormData = new FormData();
-
-    bodyFormData.append("id", payload.id);
-
-    bodyFormData.append("specs", payload.specs);
-
-    return new Promise((resolve, reject) => {
-      axios({
-        method: "PUT",
-        url: state.api.getsubCategoryDetails + payload.id,
-        contentType: "application/json",
-        data: bodyFormData,
-        headers: {
-          Authorization: "Bearer " + this.$cookies.get("access_token")
-        }
-      })
-        .then(res => {
-          // console.log(res.data)
-          // console.log('response')
-          commit("getCategory", res.data);
-          resolve(res);
-        })
-        .catch(err => {
-          console.log("error in request", err);
-        });
-    });
-  },
-
-  getBrand({ commit, state }, payload) {
-    return new Promise((resolve, reject) => {
-      if (payload == 0) {
-        payload = "all";
-      }
-
-      axios({
-        method: "GET",
-        url: state.api.getBrand + "/" + payload,
-        contentType: "application/json",
-        headers: {
-          Authorization: "Bearer " + this.$cookies.get("access_token")
-        }
-      })
-        .then(res => {
-          // console.log(res.data)
-          // console.log('response')
-          commit("getCategory", res.data);
-          resolve(res);
-        })
-        .catch(err => {
-          console.log("error in request", err);
-        });
-    });
-  },
-
   allProducts({ commit, state }, payload) {
     return new Promise((resolve, reject) => {
       axios({
@@ -302,167 +60,7 @@ export const actions = {
         }
       })
         .then(res => {
-          // console.log(res.data)
-          // console.log('response')
           commit("getAllProducts", res.data);
-          resolve(res);
-        })
-        .catch(err => {
-          console.log("error in request", err);
-        });
-    });
-  },
-
-  getAllOrder({ commit, state }, payload) {
-    return new Promise((resolve, reject) => {
-      axios({
-        method: "GET",
-        url: state.api.getAllOrder,
-        contentType: "application/json",
-        headers: {
-          Authorization: "Bearer " + this.$cookies.get("access_token")
-        }
-      })
-        .then(res => {
-          console.log(res.data);
-          console.log("response");
-          commit("getAllOrder", res.data);
-          resolve(res);
-        })
-        .catch(err => {
-          console.log("error in request", err);
-        });
-    });
-  },
-
-  getAllAuction({ commit, state }, payload) {
-    return new Promise((resolve, reject) => {
-      axios({
-        method: "GET",
-        url: state.api.getAllAuction,
-        contentType: "application/json",
-        headers: {
-          Authorization: "Bearer " + this.$cookies.get("access_token")
-        }
-      })
-        .then(res => {
-          console.log(res.data);
-          console.log("response");
-          commit("getAllAuction", res.data);
-          resolve(res);
-        })
-        .catch(err => {
-          console.log("error in request", err);
-        });
-    });
-  },
-
-  getAllCompletedAuction({ commit, state }, payload) {
-    return new Promise((resolve, reject) => {
-      axios({
-        method: "GET",
-        url:
-          state.api.getAllCompletedAuction +
-          localStorage.getItem("currentUserID"),
-        contentType: "application/json",
-        headers: {
-          Authorization: "Bearer " + this.$cookies.get("access_token")
-        }
-      })
-        .then(res => {
-          console.log(res.data);
-          console.log("response");
-          commit("getAllCompletedAuction", res.data);
-          resolve(res);
-        })
-        .catch(err => {
-          console.log("error in request", err);
-        });
-    });
-  },
-
-  getAllOngoingAuction({ commit, state }, payload) {
-    return new Promise((resolve, reject) => {
-      axios({
-        method: "GET",
-        url:
-          state.api.getAllOngoingAuction +
-          localStorage.getItem("currentUserID"),
-        contentType: "application/json",
-        headers: {
-          Authorization: "Bearer " + this.$cookies.get("access_token")
-        }
-      })
-        .then(res => {
-          console.log(res.data);
-          console.log("response");
-          commit("getAllOngoingAuction", res.data);
-          resolve(res);
-        })
-        .catch(err => {
-          console.log("error in request", err);
-        });
-    });
-  },
-
-  singleProduct({ commit, state }, payload) {
-    return new Promise((resolve, reject) => {
-      axios({
-        method: "GET",
-        url: state.api.singleProduct + localStorage.getItem("auction_item"),
-        contentType: "application/json",
-        headers: {
-          Authorization: "Bearer " + this.$cookies.get("access_token")
-        }
-      })
-        .then(res => {
-          console.log(res.data);
-          console.log("response");
-          commit("singleProduct", res.data);
-          resolve(res);
-        })
-        .catch(err => {
-          console.log("error in request", err);
-        });
-    });
-  },
-
-  addProduct({ commit, state }, payload) {
-    return new Promise((resolve, reject) => {
-      axios({
-        method: "POST",
-        data: payload,
-        url: state.api.addProduct,
-        contentType: "application/json",
-        headers: {
-          Authorization: "Bearer " + this.$cookies.get("access_token")
-        }
-      })
-        .then(res => {
-          console.log(res.data);
-          console.log("response");
-          resolve(res);
-        })
-        .catch(err => {
-          console.log("error in request", err);
-        });
-    });
-  },
-
-  addAuction({ commit, state }, payload) {
-    return new Promise((resolve, reject) => {
-      axios({
-        method: "POST",
-        data: payload,
-        url: state.api.addAuction,
-        contentType: "application/json",
-        headers: {
-          Authorization: "Bearer " + this.$cookies.get("access_token")
-        }
-      })
-        .then(res => {
-          console.log(res.data);
-          console.log("response");
           resolve(res);
         })
         .catch(err => {
@@ -610,7 +208,7 @@ export const actions = {
     return new Promise((resolve, reject) => {
       axios({
         method: "GET",
-        url: state.api.getAllSeller,
+        url: state.api.getAdmin,
         contentType: "application/json",
         headers: {
           Authorization: "Token " + localStorage.getItem("token")
@@ -1190,11 +788,12 @@ export const actions = {
         method: "POST",
         data: payload,
         url: state.api.addCategory,
-        contentType: "application/json"
+        contentType: "application/json",
+        headers: {
+          Authorization: "Token " + localStorage.getItem("token")
+        }
       })
         .then(res => {
-          // console.log(res)
-          // commit('getSingleAuction', res.data);
           resolve(res);
         })
         .catch(err => {
@@ -1240,11 +839,12 @@ export const actions = {
         method: "POST",
         data: payload,
         url: state.api.addSubCategory,
-        contentType: "application/json"
+        contentType: "application/json",
+        headers: {
+          Authorization: "Token " + localStorage.getItem("token")
+        }
       })
         .then(res => {
-          // console.log(res)
-          // commit('getSingleAuction', res.data);
           resolve(res);
         })
         .catch(err => {
@@ -1311,7 +911,10 @@ export const actions = {
         method: "POST",
         data: payload,
         url: state.api.addBrand,
-        contentType: "application/json"
+        contentType: "application/json",
+        headers: {
+          Authorization: "Token " + localStorage.getItem("token")
+        }
       })
         .then(res => {
           resolve(res);
@@ -1347,7 +950,10 @@ export const actions = {
         method: "POST",
         data: payload,
         url: state.api.getPlans,
-        contentType: "application/json"
+        contentType: "application/json",
+        headers: {
+          Authorization: "Token " + localStorage.getItem("token")
+        }
       })
         .then(res => {
           resolve(res);
@@ -1423,6 +1029,65 @@ export const actions = {
         url: state.api.updateGallery + payload.get("id"),
         contentType: "application/json",
         data: payload,
+        headers: {
+          Authorization: "Token " + localStorage.getItem("token")
+        }
+      })
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          console.log("Error In HTTP Request - ", err);
+        });
+    });
+  },
+
+  generateCoupon({ commit, state }, payload) {
+    return new Promise((resolve, reject) => {
+      axios({
+        method: "POST",
+        data: payload,
+        url: state.api.generateCoupon,
+        contentType: "application/json",
+        headers: {
+          Authorization: "Token " + localStorage.getItem("token")
+        }
+      })
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          console.log("Error In HTTP Request - ", err);
+        });
+    });
+  },
+
+  getUserCoupon({ commit, state }, payload) {
+    return new Promise((resolve, reject) => {
+      axios({
+        method: "GET",
+        url: state.api.getUserCoupon + payload,
+        contentType: "application/json",
+        headers: {
+          Authorization: "Token " + localStorage.getItem("token")
+        }
+      })
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          console.log("Error In HTTP Request - ", err);
+        });
+    });
+  },
+
+  editCoupon({ commit, state }, payload) {
+    return new Promise((resolve, reject) => {
+      axios({
+        method: "PUT",
+        data: payload,
+        url: state.api.getUserCoupon + payload.get("id"),
+        contentType: "application/json",
         headers: {
           Authorization: "Token " + localStorage.getItem("token")
         }

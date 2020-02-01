@@ -71,7 +71,7 @@
               height: 300
             })
             .use(Uppy.XHRUpload, {
-              endpoint: "http://15.206.195.168/backend/uppy_image"
+              endpoint: "http://www.mytruestrength.com/backend/uppy_image"
             });
           uppy.getFile();
           uppy.on("complete", result => {

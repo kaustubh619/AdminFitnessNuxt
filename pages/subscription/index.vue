@@ -87,7 +87,8 @@
       },
 
       deletePlan: function(id) {
-        alert("Plan with id " + id + " will be deleted");
+        // alert("Plan with id " + id + " will be deleted");
+        // this.getPlans();
       }
     }
   };

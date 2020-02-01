@@ -6,7 +6,7 @@
           class="column-padding header-bottom"
           style="display: flex; justify-content: center"
         >
-          <form>
+          <div>
             <h2 style="margin-bottom: 20px; text-align: center">
               Add Sub-Category
             </h2>
@@ -29,7 +29,7 @@
             >
               Submit
             </button>
-          </form>
+          </div>
         </div>
       </div>
     </div>

@@ -31,11 +31,17 @@ export default {
       {
         rel: "stylesheet",
         href: "https://transloadit.edgly.net/releases/uppy/v1.6.0/uppy.min.css"
+      },
+      {
+        rel: "stylesheet",
+        href:
+          "https://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css"
       }
     ],
     script: [
       {
-        src: "https://code.jquery.com/jquery-3.4.1.min.js",
+        src:
+          "https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js",
         type: "text/javascript"
       },
       {
@@ -49,6 +55,11 @@ export default {
       },
       {
         src: "https://transloadit.edgly.net/releases/uppy/v1.6.0/uppy.min.js",
+        type: "text/javascript"
+      },
+      {
+        src:
+          "https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js",
         type: "text/javascript"
       }
     ]

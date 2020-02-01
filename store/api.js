@@ -81,7 +81,13 @@ export const state = () => ({
 
   getGalleryImages: url + "/images_gallery",
 
-  updateGallery: url + "/update_gallery/"
+  updateGallery: url + "/update_gallery/",
+
+  generateCoupon: url + "/coupon",
+
+  getUserCoupon: url + "/get_coupon/",
+
+  getAdmin: url + "/user_ext"
 });
 
 export const getters = {};

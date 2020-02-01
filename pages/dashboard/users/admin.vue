@@ -29,67 +29,66 @@
 </template>
 
 <script>
-export default {
-  name: "my-component",
-  middleware: "auth",
-  data() {
-    return {
-      columns: [
-        {
-          label: "Username",
-          field: "user.username"
-        },
-        {
-          label: "Full Name",
-          field: "user.first_name"
-        },
-        {
-          label: "Email",
-          field: "user.email"
-        },
-        {
-          label: "Gender",
-          field: "gender"
-        },
-        {
-          label: "Location",
-          field: "location"
-        }
-        // {
-        //   label: "Action",
-        //   field: "details"
-        // }
-      ],
-      rows: [
-        {
-          id: 1,
-          name: "Mobile",
-          age: 20,
-          createdAt: "2011-10-31",
-          details: "<p>asa</p>"
-        }
-      ],
-      allproducts: []
-    };
-  },
-  mounted() {
-    this.getAllProducts();
-  },
-  methods: {
-    getAllProducts: function() {
-      this.$store.dispatch("getAllSeller").then(res => {
-        // console.log(res);
-        this.allproducts = JSON.parse(JSON.stringify(res.data));
-      });
+  export default {
+    name: "my-component",
+    middleware: "auth",
+    data() {
+      return {
+        columns: [
+          {
+            label: "Username",
+            field: "user.username"
+          },
+          {
+            label: "Full Name",
+            field: "user.first_name"
+          },
+          {
+            label: "Email",
+            field: "user.email"
+          },
+          {
+            label: "Gender",
+            field: "gender"
+          },
+          {
+            label: "Location",
+            field: "location"
+          }
+          // {
+          //   label: "Action",
+          //   field: "details"
+          // }
+        ],
+        rows: [
+          {
+            id: 1,
+            name: "Mobile",
+            age: 20,
+            createdAt: "2011-10-31",
+            details: "<p>asa</p>"
+          }
+        ],
+        allproducts: []
+      };
     },
-    deleteAdmin: function(id) {
-      this.$store.dispatch("deleteAdmin", id).then(res => {
-        // console.log(res);
-        this.getAllProducts();
-      });
+    mounted() {
+      this.getAllProducts();
+    },
+    methods: {
+      getAllProducts: function() {
+        this.$store.dispatch("getAllSeller").then(res => {
+          this.allproducts = JSON.parse(JSON.stringify(res.data));
+        });
+      },
+      deleteAdmin: function(id) {
+        this.$store.dispatch("deleteAdmin", id).then(res => {
+          // console.log(res);
+          this.getAllProducts();
+        });
+      }
     }
-  }
-};
+  };
 </script>
 
 <style></style>

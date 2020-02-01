@@ -16,10 +16,17 @@
         <div class="row">
           <vue-good-table :columns="columns" :rows="allproducts">
             <template slot="table-row" slot-scope="props">
-              <!-- <span v-if="props.column.field === 'details'">
-                <button type="button" @click="deleteProduct(props.row.id)" class="btn btn-primary" style="background-color:#FF0000; color:white">Delete</button>
+              <span v-if="props.column.field === 'details'">
+                <button
+                  type="button"
+                  @click="generateCoupon(props.row.user.id)"
+                  class="btn-coupon btn btn-primary"
+                  style=""
+                >
+                  Coupon
+                </button>
               </span>
-              <span v-else>{{ props.formattedRow[props.column.field] }}</span> -->
+              <span v-else>{{ props.formattedRow[props.column.field] }}</span>
             </template>
           </vue-good-table>
         </div>
@@ -29,66 +36,75 @@
 </template>
 
 <script>
-export default {
-  
-  name: "my-component",
-  middleware: 'auth',
-  data() {
-    return {
-      columns: [
-        {
-          label: "Username",
-          field: "user.username"
-        },
-        {
-          label: "Full Name",
-          field: "user.first_name"
-        },
-        {
-          label: "Email",
-          field: "user.email"
-        },
-        {
-          label: "Gender",
-          field: "gender"
-        },
-        {
-          label: "Location",
-          field: "location"
-        },
-      ],
-      rows: [
-        {
-          id: 1,
-          name: "Mobile",
-          age: 20,
-          createdAt: "2011-10-31",
-          details: "<p>asa</p>"
-        }
-      ],
-      allproducts: []
-    };
-  },
-  mounted(){
-    this.getAllProducts()
-  },
-  methods: {
-    getAllProducts: function() {
-      this.$store.dispatch("getAllCust").then(res => {
-        // console.log(res);
-        this.allproducts = JSON.parse(JSON.stringify(res.data));
-      });
+  export default {
+    name: "my-component",
+    middleware: "auth",
+    data() {
+      return {
+        columns: [
+          {
+            label: "Username",
+            field: "user.username"
+          },
+          {
+            label: "Full Name",
+            field: "user.first_name"
+          },
+          {
+            label: "Email",
+            field: "user.email"
+          },
+          {
+            label: "Gender",
+            field: "gender"
+          },
+          {
+            label: "Location",
+            field: "location"
+          },
+          {
+            label: "Action",
+            field: "details"
+          }
+        ],
+        rows: [
+          {
+            id: 1,
+            name: "Mobile",
+            age: 20,
+            createdAt: "2011-10-31",
+            details: "<p>asa</p>"
+          }
+        ],
+        allproducts: []
+      };
     },
-    deleteProduct: function(id) {
-      this.$store.dispatch("deleteProduct", id).then(res => {
-        // console.log(res);
-        this.getAllProducts();
-      });
+    mounted() {
+      this.getAllProducts();
+    },
+    methods: {
+      getAllProducts: function() {
+        this.$store.dispatch("getAllCust").then(res => {
+          this.allproducts = JSON.parse(JSON.stringify(res.data));
+        });
+      },
+      generateCoupon: function(id) {
+        this.$router.push("/dashboard/users/coupon?" + id);
+      },
     }
-  }
-};
+  };
 </script>
 
 
-<style>
+<style scoped>
+.btn-coupon {
+  background-color: #fb641b;
+  color: white;
+  box-shadow: 3px 3px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.btn-coupon:hover {
+  box-shadow: none;
+  color: #f9f9f9;
+}
 </style>
