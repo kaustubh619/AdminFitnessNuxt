@@ -1,24 +1,24 @@
 <template>
   <div>
     <client-only>
-     <NavBar v-if="$nuxt.$route.name != 'index'" />
-    <nuxt />
+      <NavBar v-if="$nuxt.$route.name != 'index'" />
+      <nuxt />
     </client-only>
   </div>
 </template>
 
 <script>
-// import TopNav from '@/components/TopNav'
-import NavBar from '@/components/NavBar'
+  // import TopNav from '@/components/TopNav'
+  import NavBar from "@/components/NavBar";
 
-export default {
-  components: {
-    NavBar,
-  },
-  mounted() {
-    // document.body.classList.add('theme-dark')
-  }
-}
+  export default {
+    components: {
+      NavBar
+    },
+    mounted() {
+      // document.body.classList.add('theme-dark')
+    }
+  };
 </script>
 
 
@@ -28,30 +28,29 @@ a.uppy-Dashboard-poweredBy {
 }
 
 @font-face {
-font-family: 'Regular';
-src: url('~static/files/fonts/Gilroy-Regular.ttf') format('truetype');
-font-weight: normal;
-font-style: normal;
+  font-family: "Regular";
+  src: url("~static/files/fonts/Gilroy-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-font-family: 'Light';
-src: url('~static/files/fonts/Gilroy-Light.ttf') format('truetype');
-font-weight: lighter;
-font-style: normal;
+  font-family: "Light";
+  src: url("~static/files/fonts/Gilroy-Light.ttf") format("truetype");
+  font-weight: lighter;
+  font-style: normal;
 }
 
 @font-face {
-font-family: 'Bold';
-src: url('~static/files/fonts/Gilroy-Bold.ttf') format('truetype');
-font-weight: bold;
-font-style: normal;
+  font-family: "Bold";
+  src: url("~static/files/fonts/Gilroy-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
 }
-
 
 html {
-  font-family: 'Regular', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: "Regular", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
@@ -59,7 +58,7 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
-  font-size: 13px
+  font-size: 13px;
 }
 
 *,
@@ -69,12 +68,13 @@ html {
   margin: 0;
 }
 
-html, body{
-    background-color: #f9f9f9
+html,
+body {
+  background-color: #f9f9f9;
 }
 
-table.vgt-table{
-  font-size: 13px!important
+table.vgt-table {
+  font-size: 13px !important;
 }
 
 .button--green {
@@ -106,24 +106,24 @@ table.vgt-table{
   background-color: #35495e;
 }
 
-h3{
-  font-family: 'bold'
+h3 {
+  font-family: "bold";
 }
 
-.btn{
-  font-family: 'Regular'
+.btn {
+  font-family: "Regular";
 }
 
 h3 {
-    font-size: 24px;
+  font-size: 24px;
 }
 
-.padding-bottom-10{
-    padding-bottom: 10px;
+.padding-bottom-10 {
+  padding-bottom: 10px;
 }
 
-
-::-moz-selection { /* Code for Firefox */
+::-moz-selection {
+  /* Code for Firefox */
   color: #ffffff;
   background: #009688;
 }
@@ -132,7 +132,6 @@ h3 {
   color: #ffffff;
   background: #009688;
 }
-
 
 .holder {
   width: 100%;
@@ -145,21 +144,31 @@ h3 {
 }
 
 @media only screen and (max-width: 600px) {
-.holder {
- padding: 20px 0;
-}
-.navbar-spacing{
-  width: 100%;
-}
+  .holder {
+    padding: 20px 0;
+  }
+  .navbar-spacing {
+    width: 100%;
+  }
 }
 
-.pointer{
+.pointer {
   cursor: pointer;
 }
 
-.break{
+.break {
   border: 0;
-    border-bottom: 1px dashed #d4d4d4;
-    margin: 45px 0;
+  border-bottom: 1px dashed #d4d4d4;
+  margin: 45px 0;
+}
+
+table.vgt-table td {
+  font-size: 16px;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 </style>

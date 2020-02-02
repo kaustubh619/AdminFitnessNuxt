@@ -1,31 +1,7 @@
 <template>
   <div>
     <div class="padding-top-20">
-      <nav class="topnav box-shadow padding-left-10 padding-right-10 row">
-        <!-- <div class="flex align-item col" style="height:100%">
-          <div class="visible-xs visible-sm">
-            <a @click="toggleSidenav">
-              <i data-feather="menu"></i>
-            </a>
-          </div>
-          <div class="hidden-xs">
-            <div class="tooltip_custom">
-              <nuxt-link to="/dashboard/parcels/pending">
-                <i data-feather="package"></i>
-              </nuxt-link>
-              <span class="tooltiptext">All Products</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="flex align-item col right" style="height:100%; justify-content:flex-end">
-          <div class="flex align-item">
-            <div style="padding-right:10px" class="hidden-xs">
-              <p class="font-30">{{currentUserEmail}}</p>
-            </div>
-          </div>
-        </div>-->
-      </nav>
+      <nav class="topnav box-shadow padding-left-10 padding-right-10 row"></nav>
     </div>
 
     <perfect-scrollbar
@@ -50,12 +26,12 @@
           <span>Admin</span>
         </nuxt-link>
       </div>
-      <div class="navbar__parent">
+      <!-- <div class="navbar__parent">
         <nuxt-link to="/dashboard/users/trainer">
           <i data-feather="users"></i>
           <span>Trainer</span>
         </nuxt-link>
-      </div>
+      </div> -->
       <div class="navbar__parent">
         <nuxt-link to="/dashboard/users/customer">
           <i data-feather="users"></i>
@@ -104,148 +80,20 @@
           <span>Plans</span>
         </nuxt-link>
       </div>
+
+      <p>Trainer Bio</p>
+      <div class="navbar__parent">
+        <nuxt-link to="/trainer">
+          <i data-feather="menu"></i>
+          <span>Trainers</span>
+        </nuxt-link>
+      </div>
+
       <p style="cursor: pointer" @click="logOutAdmin" class="logOut">
         Log Out [{{ username }}]
       </p>
-
-      <!-- <p>Orders</p>
-      <div class="navbar__parent">
-        <nuxt-link to="/dashboard/orders/all">
-          <i data-feather="plus-square"></i>
-          <span>All</span>
-        </nuxt-link>
-      </div>
-      <div class="navbar__parent">
-        <nuxt-link to="/dashboard/orders/pending">
-          <i data-feather="package"></i>
-          <span>Pending</span>
-        </nuxt-link>
-      </div>-->
-      <!-- <p>Users</p>
-      <div class="navbar__parent">
-        <nuxt-link to="/dashboard/users/users">
-          <i data-feather="users"></i>
-          <span>Admin</span>
-        </nuxt-link>
-      </div>-->
-      <!--
-      <p>Templates</p>
-      <div class="navbar__parent">
-        <nuxt-link to="/dashboard/templates/category">
-          <i data-feather="hash"></i>
-          <span>Category</span>
-        </nuxt-link>
-      </div>
-      <div class="navbar__parent">
-        <nuxt-link to="/dashboard/templates/specification">
-          <i data-feather="hash"></i>
-          <span>Specification</span>
-        </nuxt-link>
-      </div>-->
     </perfect-scrollbar>
   </div>
-
-  <!-- <div id="parentx">
-
-    
-    <vs-sidebar parent="body" default-index="1"  color="primary" class="sidebarx" spacer v-model="active">
-
-      <div class="header-sidebar" slot="header">
-        <vs-avatar  size="70px" src="https://randomuser.me/api/portraits/men/85.jpg"/>
-
-        <h4>
-          My Name
-          <vs-button color="primary" icon="more_horiz" type="flat"></vs-button>
-        </h4>
-
-      </div>
-
-      <vs-sidebar-item index="1" icon="question_answer">
-        Dashboard
-      </vs-sidebar-item>
-
-      <vs-sidebar-item index="2" icon="gavel">
-        History
-      </vs-sidebar-item>
-
-      <vs-divider icon="person" position="left">
-        User
-      </vs-divider>
-
-      <vs-sidebar-item index="3" icon="verified_user">
-        Configurations
-      </vs-sidebar-item>
-      <vs-sidebar-item index="4" icon="account_box">
-        Profile
-      </vs-sidebar-item>
-      <vs-sidebar-item index="5" >
-        Card
-      </vs-sidebar-item>
-
-      <div class="footer-sidebar" slot="footer">
-        <vs-button icon="reply" color="danger" type="flat">log out</vs-button>
-        <vs-button icon="settings" color="primary" type="border"></vs-button>
-      </div>
-
-    </vs-sidebar>
-
-
-  <div class="navbar-spacing padding-top-20">
-    <nav class="topnav box-shadow padding-left-10 padding-right-10 row">
-      <div class="flex align-item col" style="height:100%">
-        <div>
-
-          <a  @click="active=!active">
-            <i data-feather="menu"></i>
-          </a>
-        </div>
-        <div>
-          <nuxt-link to="/dashboard/parcels/pending">
-            <i data-feather="package"></i>
-          </nuxt-link>
-        </div>
-        <div>
-          <nuxt-link to="/dashboard/general/customers">
-            <i data-feather="users"></i>
-          </nuxt-link>
-        </div>
-        <div>
-          <nuxt-link to="/dashboard/general/finance">
-            <i data-feather="briefcase"></i>
-          </nuxt-link>
-        </div>
-        <div>
-          <nuxt-link to="/dashboard/general/messages">
-            <i data-feather="message-square"></i>
-          </nuxt-link>
-        </div>
-        <div>
-          <nuxt-link to="/dashboard/admins/all">
-            <i data-feather="user"></i>
-          </nuxt-link>
-        </div>
-      </div>
-      
-      <div class="flex align-item col right" style="height:100%; justify-content:flex-end">
-        <div style="position:relative;margin-right:15px">
-          <span class="feather-icon-badge bg-primary text-white h-5 w-5 absolute rounded-full text-xs flex items-center justify-center" style="top: 5px; right: 0px;position:absolute;border-radius:50px;width:20px;height:20px">5</span>
-          <nuxt-link to="/dashboard/general/messages">
-            <i data-feather="message-square"></i>
-          </nuxt-link>
-        </div>
-        <div class="flex align-item">
-          <div style="padding-right:10px">
-            <p class="font-12">Admin Name</p>
-            <p class="font-10">Email to be added</p>
-          </div>
-          <div>
-            <img src="https://via.placeholder.com/40" style="border-radius: 50px">
-          </div>
-        </div>
-      </div>
-    </nav>
-  </div>
-  </div>-->
 </template>
 
 <script>

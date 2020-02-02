@@ -1099,5 +1099,102 @@ export const actions = {
           console.log("Error In HTTP Request - ", err);
         });
     });
+  },
+
+  getTrainersList({ commit, state }) {
+    return new Promise((resolve, reject) => {
+      axios({
+        method: "GET",
+        url: state.api.getTrainersList,
+        contentType: "application/json"
+      })
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          console.log("Error In HTTP Request - ", err);
+        });
+    });
+  },
+
+  addTrainer({ commit, state }, payload) {
+    return new Promise((resolve, reject) => {
+      axios({
+        method: "POST",
+        data: payload,
+        url: state.api.addTrainer,
+        contentType: "application/json",
+        headers: {
+          Authorization: "Token " + localStorage.getItem("token")
+        }
+      })
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          console.log("Error In HTTP Request - ", err);
+        });
+    });
+  },
+
+  deleteTrainerBio({ commit, state }, payload) {
+    return new Promise((resolve, reject) => {
+      axios({
+        method: "DELETE",
+        data: payload,
+        url: state.api.updateTrainerBio + payload,
+        contentType: "application/json",
+        headers: {
+          Authorization: "Token " + localStorage.getItem("token")
+        }
+      })
+        .then(res => {
+          console.log(res.data);
+          console.log("response");
+          resolve(res);
+        })
+        .catch(err => {
+          console.log("error in request", err);
+        });
+    });
+  },
+
+  getTrainerDetails({ commit, state }, payload) {
+    return new Promise((resolve, reject) => {
+      axios({
+        method: "GET",
+        url: state.api.updateTrainerBio + payload,
+        contentType: "application/json",
+        headers: {
+          Authorization: "Token " + localStorage.getItem("token")
+        }
+      })
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          console.log("Error In HTTP Request - ", err);
+        });
+    });
+  },
+
+  updateTrainerBio({ commit, state }, payload) {
+    return new Promise((resolve, reject) => {
+      axios({
+        method: "PUT",
+        data: payload,
+        url: state.api.updateTrainerBio + payload.get("slug_id"),
+        contentType: "application/json",
+        headers: {
+          Authorization: "Token " + localStorage.getItem("token")
+        }
+      })
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          console.log("Error In HTTP Request - ", err);
+        });
+    });
   }
 };

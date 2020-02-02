@@ -87,7 +87,13 @@ export const state = () => ({
 
   getUserCoupon: url + "/get_coupon/",
 
-  getAdmin: url + "/user_ext"
+  getAdmin: url + "/user_ext",
+
+  getTrainersList: url + "/trainer_list",
+
+  addTrainer: url + "/add_trainer",
+
+  updateTrainerBio: url + "/update_trainer/"
 });
 
 export const getters = {};

@@ -191,13 +191,11 @@ a.uppy-Dashboard-poweredBy {
           width: 680,
           height: 300
         })
-        .use(Uppy.XHRUpload, { endpoint: "http://15.206.195.168/backend/uppy_image" });
+        .use(Uppy.XHRUpload, {
+          endpoint: "http://15.206.195.168/backend/uppy_image"
+        });
 
       uppy.on("complete", result => {
-        // console.log(
-        //   "Upload complete! We’ve uploaded these files:",
-        //   result.successful
-        // );
         result.successful.map(item => {
           console.log(item);
         });
