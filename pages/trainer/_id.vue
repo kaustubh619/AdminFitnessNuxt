@@ -120,12 +120,14 @@
           width: 580,
           height: 300
         })
-        .use(Uppy.XHRUpload, { endpoint: "http://mytruestrength.com/backend/uppy_image" });
+        .use(Uppy.XHRUpload, {
+          endpoint: "http://mytruestrength.com/backend/uppy_image"
+        });
 
       uppy.on("complete", result => {
         result.successful.map(item => {
           this.images.push(
-            "http://mytruestrength.com/backend/media/uppy_images/" + item.name
+            "http://mytruestrength.com/media/uppy_images/" + item.name
           );
         });
       });
